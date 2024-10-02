@@ -5,8 +5,10 @@ using UnityEngine;
 public class Mov : MonoBehaviour
 {
     public float speed;
-    private Rigidbody2D rb;
     public Animator animator;
+    private Rigidbody2D rb;
+    private float playerDirection, playerOrientation;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,22 +19,37 @@ public class Mov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position = transform.position + new Vector3(speed, 0, 0) * Time.deltaTime;
-            animator.SetBool("isMoving", true);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position = transform.position + new Vector3(-speed, 0, 0) * Time.deltaTime;
-            animator.SetBool("isMoving", true);
-        }
-        if(Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
-            animator.SetBool("isMoving", false);
+        RunMovement();
+        ChangeGravity();
     }
 
-    public void Move()
+    public void RunMovement()
     {
-        
+        const string IsMoving = "isMoving";
+        const int flatAngle = 180, nullAngle = 0;
+
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
+        {
+            playerDirection = Input.GetKey(KeyCode.D) ? speed : -speed;
+            transform.position = transform.position + new Vector3(playerDirection, 0, 0) * Time.deltaTime;
+
+            //ROTACION DEL PERSONAJE
+            playerOrientation = Input.GetKey(KeyCode.D) ? nullAngle : flatAngle;
+            transform.rotation =   ;
+
+            animator.SetBool(IsMoving, true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+            animator.SetBool(IsMoving, false);
+    }
+
+    public void ChangeGravity()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.gravityScale = -rb.gravityScale;
+            transform.Rotate(180, 0, 0);
+        }
     }
 }
