@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class Mov : MonoBehaviour
 {
+    const int FlatAngle = 180, NullAngle = 0;
+
     public float speed;
     public Animator animator;
+
     private Rigidbody2D rb;
-    private float playerDirection, playerOrientation;
+    private bool isGravityInverted;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        isGravityInverted = false;
     }
 
     // Update is called once per frame
@@ -26,16 +30,18 @@ public class Mov : MonoBehaviour
     public void RunMovement()
     {
         const string IsMoving = "isMoving";
-        const int flatAngle = 180, nullAngle = 0;
+        float playerDirection, playerOrientation;
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {
+            //MOVEMENT
             playerDirection = Input.GetKey(KeyCode.D) ? speed : -speed;
-            transform.position = transform.position + new Vector3(playerDirection, 0, 0) * Time.deltaTime;
+            transform.position += new Vector3(playerDirection, NullAngle, NullAngle) * Time.deltaTime;
 
-            //ROTACION DEL PERSONAJE
-            playerOrientation = Input.GetKey(KeyCode.D) ? nullAngle : flatAngle;
-            transform.rotation =   ;
+            //ROTATION
+            //Si el personaje esta invertido, se le sumara 180 grados por estar en la inversa.
+            playerOrientation = (playerDirection > 0 ? NullAngle : FlatAngle) + (isGravityInverted ? FlatAngle : NullAngle);
+            transform.rotation = Quaternion.Euler(transform.eulerAngles.x, playerOrientation, transform.eulerAngles.z);
 
             animator.SetBool(IsMoving, true);
         }
@@ -49,7 +55,8 @@ public class Mov : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.gravityScale = -rb.gravityScale;
-            transform.Rotate(180, 0, 0);
+            isGravityInverted = !isGravityInverted;
+            transform.rotation = Quaternion.Euler(FlatAngle, transform.eulerAngles.y, transform.eulerAngles.z);
         }
     }
 }
