@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Mov : MonoBehaviour
 {
+    const string IsMoving = "isMoving", IsJumping = "isJumping";
     const int FlatAngle = 180, NullAngle = 0;
 
     public float speed;
@@ -29,7 +30,6 @@ public class Mov : MonoBehaviour
 
     public void RunMovement()
     {
-        const string IsMoving = "isMoving";
         float playerDirection, playerOrientation;
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
@@ -57,6 +57,9 @@ public class Mov : MonoBehaviour
             rb.gravityScale = -rb.gravityScale;
             isGravityInverted = !isGravityInverted;
             transform.rotation = Quaternion.Euler(FlatAngle, transform.eulerAngles.y, transform.eulerAngles.z);
+            animator.SetBool(IsJumping, true);
         }
+        //Si el personaje esta en el suelo, se le quita la animacion de salto. UTILIZA RAYCAST
+
     }
 }
