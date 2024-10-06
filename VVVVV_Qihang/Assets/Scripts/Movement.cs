@@ -11,6 +11,7 @@ public class Mov : MonoBehaviour
     public Animator animator;
 
     private Rigidbody2D rb;
+    private RaycastHit2D hit;
     private bool isGravityInverted;
 
 
@@ -24,8 +25,17 @@ public class Mov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector2 downRay = transform.TransformDirection(Vector2.down);
+        hit = Physics2D.Raycast(transform.position, downRay, 1f);
+        Debug.DrawRay(transform.position, downRay * 1f, Color.red); //Muestra el raycast en el editor
+
+        if (hit.collider != null)
+        {
+            animator.SetBool(IsJumping, false);
+            ChangeGravity();
+        }
+
         RunMovement();
-        ChangeGravity();
     }
 
     public void RunMovement()
@@ -34,11 +44,11 @@ public class Mov : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {
-            //MOVEMENT
+            //MOVIMIENTO
             playerDirection = Input.GetKey(KeyCode.D) ? speed : -speed;
             transform.position += new Vector3(playerDirection, NullAngle, NullAngle) * Time.deltaTime;
 
-            //ROTATION
+            //ROTACION
             //Si el personaje esta invertido, se le sumara 180 grados por estar en la inversa.
             playerOrientation = (playerDirection > 0 ? NullAngle : FlatAngle) + (isGravityInverted ? FlatAngle : NullAngle);
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, playerOrientation, transform.eulerAngles.z);
@@ -56,10 +66,11 @@ public class Mov : MonoBehaviour
         {
             rb.gravityScale = -rb.gravityScale;
             isGravityInverted = !isGravityInverted;
+
+            //Cambiamos la rotacion del personaje al cambiar la gravedad
             transform.rotation = Quaternion.Euler(FlatAngle, transform.eulerAngles.y, transform.eulerAngles.z);
+
             animator.SetBool(IsJumping, true);
         }
-        //Si el personaje esta en el suelo, se le quita la animacion de salto. UTILIZA RAYCAST
-
     }
 }
