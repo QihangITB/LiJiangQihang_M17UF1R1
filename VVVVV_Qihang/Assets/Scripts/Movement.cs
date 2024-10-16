@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Mov : MonoBehaviour
 {
-    const string IsMoving = "isMoving", IsJumping = "isJumping";
+    const string AnimatorMoving = "isMoving", AnimatorJumping = "isJumping";
     const int FlatAngle = 180, NullAngle = 0;
 
     public float speed;
@@ -31,7 +31,7 @@ public class Mov : MonoBehaviour
 
         if (hit.collider != null)
         {
-            animator.SetBool(IsJumping, false);
+            animator.SetBool(AnimatorJumping, false);
             ChangeGravity();
         }
 
@@ -49,15 +49,15 @@ public class Mov : MonoBehaviour
             transform.position += new Vector3(playerDirection, NullAngle, NullAngle) * Time.deltaTime;
 
             //ROTACION
-            //Si el personaje esta invertido, se le sumara 180 grados por estar en la inversa.
+            //Si el personaje esta invertido, se le sumara 180 grados por estar en la inversa, de esta manera las direcciones X y Y coinciden con el sprite.
             playerOrientation = (playerDirection > 0 ? NullAngle : FlatAngle) + (isGravityInverted ? FlatAngle : NullAngle);
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, playerOrientation, transform.eulerAngles.z);
 
-            animator.SetBool(IsMoving, true);
+            animator.SetBool(AnimatorMoving, true);
         }
 
         if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
-            animator.SetBool(IsMoving, false);
+            animator.SetBool(AnimatorMoving, false);
     }
 
     public void ChangeGravity()
@@ -70,7 +70,12 @@ public class Mov : MonoBehaviour
             //Cambiamos la rotacion del personaje al cambiar la gravedad
             transform.rotation = Quaternion.Euler(FlatAngle, transform.eulerAngles.y, transform.eulerAngles.z);
 
-            animator.SetBool(IsJumping, true);
+            animator.SetBool(AnimatorJumping, true);
         }
+    }
+
+    public void DisableMovement()
+    {
+
     }
 }
