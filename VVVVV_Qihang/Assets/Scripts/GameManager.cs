@@ -4,38 +4,53 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    const string AnimatorDead = "isDead", DamageObject = "Damage";
+    const string AnimatorDead = "isDead", DamageObject = "Damage", StartPoint = "Entrance";
 
-    public static GameManager gameManager;
+    public static GameManager manager;
     public Animator animator;
-    
-    private bool dead = false;
+
+    private Transform checkPoint;
+    private bool canMove = true;
 
     public void Awake()
     {
-        if( gameManager != null && gameManager != this )
+        if(manager != null && manager != this )
             Destroy(this.gameObject);
-        gameManager = this;
+
+        manager = this;
+
+        checkPoint = GameObject.Find(StartPoint).transform;
     }
 
-    public void Update()
+    public bool CanPlayerMove()
     {
-        if (IsDead())
-        {
-            animator.SetBool(AnimatorDead, true);
-        }
+        return canMove;
     }
 
-    public bool IsDead()
+    public void SetCheckPoint(Transform newCheckPoint)
     {
-        return dead;
+        checkPoint = newCheckPoint;
+    }
+
+    public Transform GetCheckPoint()
+    {
+        return checkPoint;
+    }
+    public void Respawn()
+    {
+        //El jugador aparece en el checkpoint
+        animator.gameObject.transform.position = checkPoint.position;
+
+        //Permitimos sus movimientos
+        canMove = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == DamageObject)
         {
-            dead = true;
+            animator.SetBool(AnimatorDead, true);
+            canMove = false;
         }
     }
 }

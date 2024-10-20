@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mov : MonoBehaviour
+public class Movement : MonoBehaviour
 {
     const string AnimatorMoving = "isMoving", AnimatorJumping = "isJumping";
     const int FlatAngle = 180, NullAngle = 0;
@@ -25,7 +25,13 @@ public class Mov : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 downRay = transform.TransformDirection(Vector2.down);
+        if (!GameManager.manager.CanPlayerMove())
+        {
+            DisableRunAnimation();
+            return;
+        }
+
+        Vector2 downRay = transform.TransformDirection(Vector2.down); //Siempre indica el vector que va hacia abajo del personaje.
         hit = Physics2D.Raycast(transform.position, downRay, 1f);
         Debug.DrawRay(transform.position, downRay * 1f, Color.red); //Muestra el raycast en el editor
 
@@ -38,7 +44,7 @@ public class Mov : MonoBehaviour
         RunMovement();
     }
 
-    public void RunMovement()
+    private void RunMovement()
     {
         float playerDirection, playerOrientation;
 
@@ -57,10 +63,15 @@ public class Mov : MonoBehaviour
         }
 
         if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
-            animator.SetBool(AnimatorMoving, false);
+            DisableRunAnimation();
     }
 
-    public void ChangeGravity()
+    private void DisableRunAnimation()
+    {
+        animator.SetBool(AnimatorMoving, false);
+    }
+
+    private void ChangeGravity()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -72,10 +83,5 @@ public class Mov : MonoBehaviour
 
             animator.SetBool(AnimatorJumping, true);
         }
-    }
-
-    public void DisableMovement()
-    {
-
     }
 }
