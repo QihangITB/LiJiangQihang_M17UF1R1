@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ecdd1730781a6e74cb38b5327bcbd8c5
+guid: eb27c7a027bad78458815b457efff9e8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,127 +110,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Money_0
+      name: shooter_enemy_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 5
         y: 0
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7379fdce937e36f4b96f4a7f55e960b6
-      internalID: 575367368
+      spriteID: 2b7c937d6880ee340a108c78a332847c
+      internalID: -177842250
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Money_1
+      name: shooter_enemy_1
       rect:
         serializedVersion: 2
-        x: 24
+        x: 37
         y: 0
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3430ee94f498d9d41b8d05dc8765708f
-      internalID: 1191634205
+      spriteID: d6ac117bdef42a44eb853f9d25b968c7
+      internalID: -604417680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Money_2
+      name: shooter_enemy_2
       rect:
         serializedVersion: 2
-        x: 48
+        x: 69
         y: 0
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 676a9a114b03b1840b8fc1883b06763d
-      internalID: -1028618631
+      spriteID: 8124429d69102b94da8c79e00ce7624b
+      internalID: 1971831679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Money_3
+      name: shooter_enemy_3
       rect:
         serializedVersion: 2
-        x: 72
+        x: 101
         y: 0
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 444f9ecfc8c624441b6ff137bba5f3d4
-      internalID: 1282245678
+      spriteID: 12fe712a68d0cab4db1b626be0d3d172
+      internalID: 187669092
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Money_4
+      name: shooter_enemy_4
       rect:
         serializedVersion: 2
-        x: 96
+        x: 133
         y: 0
         width: 24
         height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3babf69f79d875944b715ba616b88d8a
-      internalID: -987258043
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Money_5
-      rect:
-        serializedVersion: 2
-        x: 120
-        y: 0
-        width: 24
-        height: 24
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 50c6c3a5aa0c52e4db51322b7eade901
-      internalID: 516955853
+      spriteID: 612bde1af6e93ac4cafa4bacb3b24431
+      internalID: -1826826778
       vertices: []
       indices: 
       edges: []
@@ -246,12 +225,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Money_0: 575367368
-      Money_1: 1191634205
-      Money_2: -1028618631
-      Money_3: 1282245678
-      Money_4: -987258043
-      Money_5: 516955853
+      shooter_enemy_0: -177842250
+      shooter_enemy_1: -604417680
+      shooter_enemy_2: 1971831679
+      shooter_enemy_3: 187669092
+      shooter_enemy_4: -1826826778
+      shooter_enemy_5: -505417987
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
