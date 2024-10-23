@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     const string AnimatorMoving = "isMoving", AnimatorJumping = "isJumping";
     const int FlatAngle = 180, NullAngle = 0;
