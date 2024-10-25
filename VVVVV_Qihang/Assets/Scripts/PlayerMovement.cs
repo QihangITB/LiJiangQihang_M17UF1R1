@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     const string AnimatorMoving = "isMoving", AnimatorJumping = "isJumping";
-    const int FlatAngle = 180, NullAngle = 0;
+    const int FlatAngle = 180, NullAngle = 0, HalfDivider = 2, Zero = 0;
 
     public float speed;
     public Animator animator;
 
     private Rigidbody2D rb;
-    private RaycastHit2D hit;
+    private BoxCollider2D playerCollider;
     private bool isGravityInverted;
 
 
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<BoxCollider2D>();
         isGravityInverted = false;
     }
 
@@ -31,11 +32,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        Vector2 downRay = transform.TransformDirection(Vector2.down); //Siempre indica el vector que va hacia abajo del personaje.
-        hit = Physics2D.Raycast(transform.position, downRay, 1f);
-        Debug.DrawRay(transform.position, downRay * 1f, Color.red); //Muestra el raycast en el editor
-
-        if (hit.collider != null)
+        if (OnTheFloor())
         {
             animator.SetBool(AnimatorJumping, false);
             ChangeGravity();
@@ -83,5 +80,20 @@ public class PlayerMovement : MonoBehaviour
 
             animator.SetBool(AnimatorJumping, true);
         }
+    }
+
+    private bool OnTheFloor()
+    {
+        float rayDistance = 1f;
+
+        //Siempre indica el vector que va hacia abajo del personaje.
+        Vector2 downDirection = transform.TransformDirection(Vector2.down);
+
+        //Muestra el raycast en el editor de escenas.
+        Debug.DrawRay(transform.position, downDirection * rayDistance, Color.red);
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, downDirection, rayDistance);
+
+        return hit.collider != null;
     }
 }

@@ -6463,6 +6463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 2129830534299450396, guid: bfb90da1977e052448c5468ce1df3fff, type: 3}
+  speed: 2
 --- !u!1 &1737031381
 GameObject:
   m_ObjectHideFlags: 0
@@ -8828,11 +8829,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2094174617231519799, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.9051633
+      value: -1.78
       objectReference: {fileID: 0}
     - target: {fileID: 2094174617231519799, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.05
+      value: -2.1
       objectReference: {fileID: 0}
     - target: {fileID: 2094174617231519799, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9000,6 +9001,10 @@ PrefabInstance:
     - target: {fileID: 5148190203175640749, guid: 1f692f8ed62b18b43bb8fffebc139c43, type: 3}
       propertyPath: m_Name
       value: Shooter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148190203175640749, guid: 1f692f8ed62b18b43bb8fffebc139c43, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7615822199637882141, guid: 1f692f8ed62b18b43bb8fffebc139c43, type: 3}
       propertyPath: m_SortingOrder
