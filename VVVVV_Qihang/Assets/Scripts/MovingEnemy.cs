@@ -5,10 +5,11 @@ using UnityEngine.Rendering;
 
 public class MovingEnemy : MonoBehaviour
 {
-    const string PlayerTag = "Player";
+    const string PlayerTag = "Player", AnimatorMoving = "isMoving";
     const int Double = 2;
     const float MinimumDistance = 0.5f;
 
+    public Animator animator;
     public float speed;
     public float waitingTime;
     public GameObject pointA, pointB;
@@ -23,6 +24,12 @@ public class MovingEnemy : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         StartCoroutine(MovingBehaviour());
+    }
+
+    void Update()
+    {
+        AnimationHandler();
+        Debug.Log(canMove);
     }
 
     private IEnumerator MovingBehaviour()
@@ -56,13 +63,15 @@ public class MovingEnemy : MonoBehaviour
             }
             else
             {
+                //Espera un tiempo antes de poder moverse.
                 yield return new WaitForSeconds(waitingTime);
                 canMove = true;
             }
-
             //Espera un frame para que no se mueva tan rápido.
             yield return null;
         }
+        //Al llegar al destino, se bloquea su movilidad, pero más tarde volvera a activarse.
+        canMove = false;
     }
 
     private float SpeedHandler(Transform destination)
@@ -84,11 +93,31 @@ public class MovingEnemy : MonoBehaviour
         //Si no detecta nada, devuelve false y la funcion se acaba aqui.
         if (hit.collider == null) return false;
 
-        //Si detecta al jugador y no esta cerca, devuelve true.
+        //En este caso nos referimos si el enemigo esta cerca del jugador.
         bool isPlayerNear = Vector2.Distance(transform.position, hit.collider.transform.position) < MinimumDistance;
         canMove = !isPlayerNear;
-        //Debug.Log("Player is near: " + isPlayerNear);
 
+        //Si detecta al jugador y no esta cerca, devuelve true.
         return (hit.collider.CompareTag(PlayerTag) && !isPlayerNear) ? true : false;
+    }
+
+    private void AnimationHandler()
+    {
+        if(HasAnimatorParameter(AnimatorMoving))
+        {
+            //Si el enemigo puede moverse, activa la animación de movimiento.
+            animator.SetBool(AnimatorMoving, canMove);
+        }
+    }
+
+    //Comprueba si el Animator tiene el parametro que le especificamos.
+    private bool HasAnimatorParameter(string parameterName)
+    {
+        foreach (AnimatorControllerParameter parameter in animator.parameters)
+        {
+            if (parameter.name == parameterName)
+                return true;
+        }
+        return false;
     }
 }

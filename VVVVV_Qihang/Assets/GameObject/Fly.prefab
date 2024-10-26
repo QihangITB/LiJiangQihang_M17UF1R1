@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6604ca4f67c0074439bf40ab8b94bd39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 3854465001729943819}
   speed: 1
   waitingTime: 2
   pointA: {fileID: 2553648559498478868}

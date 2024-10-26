@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 5892947333567690155}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.46, y: 0, z: 0}
+  m_LocalPosition: {x: 1.71, y: 0, z: 0}
   m_LocalScale: {x: 0.7370863, y: 0.7370863, z: 0.7370863}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -91,7 +91,7 @@ Transform:
   m_GameObject: {fileID: 7538321941046608325}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.0962601, y: 0, z: 0}
+  m_LocalPosition: {x: -0.22, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6604ca4f67c0074439bf40ab8b94bd39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 7940598158888724928}
   speed: 1
   waitingTime: 2
   pointA: {fileID: 5892947333567690155}
@@ -215,7 +216,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.026585639, y: -0.04984799}
@@ -256,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 8877529543082770906}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.44, y: -0.58, z: -0.0128290765}
+  m_LocalPosition: {x: -3.85, y: -0.58, z: -0.0128290765}
   m_LocalScale: {x: 1.3447, y: 1.3447, z: 1.3447}
   m_ConstrainProportionsScale: 0
   m_Children:
