@@ -45,12 +45,20 @@ public class GameManager : MonoBehaviour
         canMove = true;
     }
 
+    private void Death()
+    {
+        animator.SetBool(AnimatorDead, true);
+        canMove = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == DamageObject)
-        {
-            animator.SetBool(AnimatorDead, true);
-            canMove = false;
-        }
+        if (collision.gameObject.CompareTag(DamageObject))
+            Death();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(DamageObject))
+            Death();
     }
 }
