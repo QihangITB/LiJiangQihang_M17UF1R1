@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ShooterEnemy : MonoBehaviour
 {
-    const string SpawnerName = "Spawner",  IgnoreRaycastLayer = "Ignore Raycast";
-    const int HalfDivider = 2;
+    const int HalfDivider = 2, Zero = 0;
     const float CollisionOffset = 0.1f;
 
     public GameObject projectilePrefab;
@@ -14,20 +13,16 @@ public class ShooterEnemy : MonoBehaviour
     private Stack<GameObject> projectilePool;
     private GameObject projectileSpawner, projectile;
     private Collider2D collisionObject;
-    private LayerMask ignoreRaycastMask;
     private float collisionRadius;
 
     void Start()
     {
         projectilePool = new Stack<GameObject>();
-        projectileSpawner = transform.Find(SpawnerName).gameObject;
+        projectileSpawner = transform.GetChild(Zero).gameObject;
         projectile = Instantiate(projectilePrefab, projectileSpawner.transform.position, Quaternion.identity);
 
         //Como queremos el radeo, dividimos el tamaño entre 2.
         collisionRadius = (projectile.GetComponent<CapsuleCollider2D>().size.x / HalfDivider) - CollisionOffset;
-
-        //Cogemos la capa que del jugador que ignora el raycast.
-        ignoreRaycastMask = LayerMask.GetMask(IgnoreRaycastLayer);
     }
 
     void Update()
@@ -36,8 +31,8 @@ public class ShooterEnemy : MonoBehaviour
         {
             ProjectileMovement();
 
-            //Solo colisionara con la capa "Ignore Raycast" porque es la del jugador, por lo tanto, crearemos paredes especificas con esta capa para que también colisione con ellas.
-            collisionObject = Physics2D.OverlapCircle(projectile.transform.position, collisionRadius, ignoreRaycastMask);
+            //Comprobamos si el proyectil colisiona con algo.
+            collisionObject = Physics2D.OverlapCircle(projectile.transform.position, collisionRadius);
 
             //Dibujamos el círculo de colisión del proyectil para visualizarlo en Scene, utilizando una funcion de CHATGPT.
             DrawDebugCircle(projectile.transform.position, collisionRadius, Color.red);
@@ -56,7 +51,7 @@ public class ShooterEnemy : MonoBehaviour
         //Si el proyectil colisiona con algo que no sea si mismo, lo guardamos y lo desactivamos al Stack.
         if (collider != null && collider != projectile)
         {
-            Debug.Log("Projectile collision with: " + collider.name);
+            //Debug.Log("Projectile collision with: " + collider.name);
             this.PushProjectile(projectile);
         }
     }
@@ -66,7 +61,7 @@ public class ShooterEnemy : MonoBehaviour
     {
         if (!this.IsStackVoid())
         {
-            Debug.Log(projectilePool.Count);
+            //Debug.Log("Stack count: " + projectilePool.Count);
             projectile = this.PopProjectile();
             if (projectile != null)
             {

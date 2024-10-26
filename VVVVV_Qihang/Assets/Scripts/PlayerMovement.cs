@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    const string AnimatorMoving = "isMoving", AnimatorJumping = "isJumping";
-    const int FlatAngle = 180, NullAngle = 0, HalfDivider = 2, Zero = 0;
+    const string AnimatorMoving = "isMoving", AnimatorJumping = "isJumping", SurfaceLayer = "Surface";
+    const int OpenAngle = 180, CloseAngle = 0, HalfDivider = 2, Zero = 0;
+    const float RayDistance = 1f;
 
     public float speed;
     public Animator animator;
 
     private Rigidbody2D rb;
-    private BoxCollider2D playerCollider;
     private bool isGravityInverted;
+    private LayerMask surfaceLayer;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        playerCollider = GetComponent<BoxCollider2D>();
+        surfaceLayer = LayerMask.GetMask(SurfaceLayer);
         isGravityInverted = false;
     }
 
@@ -49,11 +50,11 @@ public class PlayerMovement : MonoBehaviour
         {
             //MOVIMIENTO
             playerDirection = Input.GetKey(KeyCode.D) ? speed : -speed;
-            transform.position += new Vector3(playerDirection, NullAngle, NullAngle) * Time.deltaTime;
+            transform.position += new Vector3(playerDirection, Zero, Zero) * Time.deltaTime;
 
             //ROTACION
             //Si el personaje esta invertido, se le sumara 180 grados por estar en la inversa, de esta manera las direcciones X y Y coinciden con el sprite.
-            playerOrientation = (playerDirection > 0 ? NullAngle : FlatAngle) + (isGravityInverted ? FlatAngle : NullAngle);
+            playerOrientation = (playerDirection > Zero ? CloseAngle : OpenAngle) + (isGravityInverted ? OpenAngle : CloseAngle);
             transform.rotation = Quaternion.Euler(transform.eulerAngles.x, playerOrientation, transform.eulerAngles.z);
 
             animator.SetBool(AnimatorMoving, true);
@@ -76,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
             isGravityInverted = !isGravityInverted;
 
             //Cambiamos la rotacion del personaje al cambiar la gravedad
-            transform.rotation = Quaternion.Euler(FlatAngle, transform.eulerAngles.y, transform.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(OpenAngle, transform.eulerAngles.y, transform.eulerAngles.z);
 
             animator.SetBool(AnimatorJumping, true);
         }
@@ -84,15 +85,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool OnTheFloor()
     {
-        float rayDistance = 1f;
-
         //Siempre indica el vector que va hacia abajo del personaje.
         Vector2 downDirection = transform.TransformDirection(Vector2.down);
 
-        //Muestra el raycast en el editor de escenas.
-        Debug.DrawRay(transform.position, downDirection * rayDistance, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, downDirection, RayDistance, surfaceLayer);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, downDirection, rayDistance);
+        //Muestra el raycast en el editor de escenas.
+        Debug.DrawRay(transform.position, downDirection * RayDistance, Color.red);
 
         return hit.collider != null;
     }

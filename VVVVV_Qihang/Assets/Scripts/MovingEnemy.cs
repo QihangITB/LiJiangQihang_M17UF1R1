@@ -5,20 +5,23 @@ using UnityEngine.Rendering;
 
 public class MovingEnemy : MonoBehaviour
 {
-    const string PlayerTag = "Player", IgnoreRaycastLayer = "Ignore Raycast";
+    const string PlayerTag = "Player";
     const int Double = 2;
+    const float MinimumDistance = 0.5f;
 
     public float speed;
     public float waitingTime;
     public GameObject pointA, pointB;
 
     private SpriteRenderer sprite;
-    private LayerMask ignoreRaycastMask;
+    private bool canMove = true;
+    private Vector2 direction;
+    private float distance;
+    private RaycastHit2D hit;
 
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-        ignoreRaycastMask = LayerMask.GetMask(IgnoreRaycastLayer);
         StartCoroutine(MovingBehaviour());
     }
 
@@ -40,10 +43,23 @@ public class MovingEnemy : MonoBehaviour
 
     private IEnumerator MoveTo(Transform destination)
     {
-        while (Vector2.Distance(transform.position, destination.position) > 0.1f)
+        while (Vector2.Distance(transform.position, destination.position) > MinimumDistance)
         {
-            //Mueve hacia el destino
-            transform.position += (destination.position - transform.position).normalized * SpeedHandler(destination) * Time.deltaTime;
+            //Mueve hacia el destino si su movilidad esta activado (dependiendo de si el jugador esta cerca).
+            if(canMove)
+            {
+                direction = (destination.position - transform.position).normalized;
+                transform.position += (Vector3) direction * SpeedHandler(destination) * Time.deltaTime;
+
+                //Debug.Log("Moving to: " + destination.name);
+                //Debug.Log("Speed: " + SpeedHandler(destination));
+            }
+            else
+            {
+                yield return new WaitForSeconds(waitingTime);
+                canMove = true;
+            }
+
             //Espera un frame para que no se mueva tan rápido.
             yield return null;
         }
@@ -57,18 +73,22 @@ public class MovingEnemy : MonoBehaviour
 
     private bool PlayerDetection(Transform destiantion)
     {
-        Vector2 direction = (destiantion.position - transform.position).normalized;
-        float distance = Vector2.Distance(transform.position, destiantion.position);
+        direction = (destiantion.position - transform.position).normalized;
+        distance = Vector2.Distance(transform.position, destiantion.position);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distance, ignoreRaycastMask);
+        hit = Physics2D.Raycast(transform.position, direction, distance);
 
         //Lo dibuja en la escena
         Debug.DrawRay(transform.position, direction * distance, Color.red);
 
-        //Si no detecta nada, devuelve false.
+        //Si no detecta nada, devuelve false y la funcion se acaba aqui.
         if (hit.collider == null) return false;
 
-        //Si el raycast detecta al jugador y no esta en su posicion, devuelve true.
-        return (hit.collider.CompareTag(PlayerTag) && transform.position != hit.collider.transform.position) ? true : false;
+        //Si detecta al jugador y no esta cerca, devuelve true.
+        bool isPlayerNear = Vector2.Distance(transform.position, hit.collider.transform.position) < MinimumDistance;
+        canMove = !isPlayerNear;
+        //Debug.Log("Player is near: " + isPlayerNear);
+
+        return (hit.collider.CompareTag(PlayerTag) && !isPlayerNear) ? true : false;
     }
 }
