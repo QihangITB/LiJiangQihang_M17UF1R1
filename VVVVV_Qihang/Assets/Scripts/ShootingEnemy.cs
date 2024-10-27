@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShooterEnemy : MonoBehaviour
+public class ShootingEnemy : MonoBehaviour
 {
     const int HalfDivider = 2, Zero = 0;
     const float CollisionOffset = 0.1f;
@@ -71,7 +71,7 @@ public class ShooterEnemy : MonoBehaviour
         }
     }
 
-    public void PushProjectile(GameObject projectile)
+    private void PushProjectile(GameObject projectile)
     {
         //Comprobamos que el stack esté vacio porque solo queremos 1 proyectil.
         if (this.IsStackVoid())
@@ -84,7 +84,7 @@ public class ShooterEnemy : MonoBehaviour
         }
     }
 
-    public GameObject PopProjectile()
+    private GameObject PopProjectile()
     {
         //Devuelve el ultimo proyectil que se metio en el stack.
         return projectilePool.Pop();
