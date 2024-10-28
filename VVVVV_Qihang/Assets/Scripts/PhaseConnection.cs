@@ -5,15 +5,13 @@ using UnityEngine;
 public class PhaseConnection : MonoBehaviour
 {
     private const string PlayerTag = "Player";
-    private const string ConnectionGroup = "Connection"; //GameObject que contiene los puntos de conexión.
-    private const string EntranceName = "Entrance"; //GameObject de entrada que esta dentro de "Connection".
-    private const string ExitName = "Exit"; //GameObject de salida que esta dentro de "Connection".
-
 
     [SerializeField] private GameObject entrance;
     [SerializeField] private GameObject exit;
     [SerializeField] private GameObject previousPhase;
+    [SerializeField] private GameObject previousPhaseExit;
     [SerializeField] private GameObject nextPhase;
+    [SerializeField] private GameObject nextPhaseEntrance;
 
     private Collider2D playerCollision;
     private Collider2D entranceCollision;
@@ -32,14 +30,14 @@ public class PhaseConnection : MonoBehaviour
         if (playerCollision.IsTouching(exitCollision) && nextPhase != null)
         {
             ChangePhase(nextPhase);
-            PlayerSpawn(nextPhase, EntranceName); //La salida esta conectada con la entrada de la fase siguiente.
+            PlayerSpawn(nextPhase, nextPhaseEntrance.transform); //La salida esta conectada con la entrada de la fase siguiente.
         }
 
         //Si hay una fase anterior, accede a ella.
         if (playerCollision.IsTouching(entranceCollision) && previousPhase != null)
         {
             ChangePhase(previousPhase);
-            PlayerSpawn(previousPhase, ExitName); //La entrada esta conectada con la salida de la fase anterior.
+            PlayerSpawn(previousPhase, previousPhaseExit.transform); //La entrada esta conectada con la salida de la fase anterior.
         }
     }
 
@@ -51,17 +49,10 @@ public class PhaseConnection : MonoBehaviour
     }
 
     //Coloca al jugador en la entrada/salida de la nueva fase, dependiendo de si se accede a la fase anterior o siguiente.
-    private void PlayerSpawn(GameObject newPhase, string spawnPoint)
+    private void PlayerSpawn(GameObject newPhase, Transform spawnPoint)
     {
         GameObject player = GameObject.FindGameObjectWithTag(PlayerTag);
-        Transform spawn = newPhase.transform.Find(ConnectionGroup).Find(spawnPoint);
-
-        if (spawn != null)
-        {
-            player.transform.position = spawn.position;
-
-            //Guardamos el checkpoint de la nueva fase en el GameManager.
-            GameManager.manager.SetCheckPoint(spawn);
-        }
+        if (spawnPoint != null)
+            player.transform.position = spawnPoint.position;
     }
 }

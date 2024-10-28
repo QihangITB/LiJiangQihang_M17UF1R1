@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    const string AnimatorDead = "isDead", DamageObject = "Damage", StartPoint = "Entrance";
+    const string AnimatorDead = "isDead", DamageObject = "Damage";
 
     public static GameManager manager;
     public Animator animator;
@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
 
         manager = this;
-
-        checkPoint = GameObject.Find(StartPoint).transform;
     }
 
     public bool CanPlayerMove()

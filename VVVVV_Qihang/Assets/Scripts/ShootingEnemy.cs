@@ -21,6 +21,9 @@ public class ShootingEnemy : MonoBehaviour
         projectileSpawner = transform.GetChild(Zero).gameObject;
         projectile = Instantiate(projectilePrefab, projectileSpawner.transform.position, Quaternion.identity);
 
+        //El proyectil se convierte en hijo del enemigo tirador, para que cada uno tenga su propio proyectil de forma independiente.
+        projectile.transform.SetParent(this.transform);
+
         //Como queremos el radeo, dividimos el tamaño entre 2.
         collisionRadius = (projectile.GetComponent<CapsuleCollider2D>().size.x / HalfDivider) - CollisionOffset;
     }
@@ -43,7 +46,8 @@ public class ShootingEnemy : MonoBehaviour
 
     private void ProjectileMovement()
     {
-        projectile.transform.position += Vector3.right * speed * Time.deltaTime;
+        //El proyectil se movera segun la dirección a la que este orientado.
+        projectile.transform.position += transform.right * speed * Time.deltaTime;
     }
 
     private void ProjectileCollision(GameObject projectile, Collider2D collider)

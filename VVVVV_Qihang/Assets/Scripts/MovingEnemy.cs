@@ -29,7 +29,7 @@ public class MovingEnemy : MonoBehaviour
     void Update()
     {
         AnimationHandler();
-        Debug.Log(canMove);
+        //Debug.Log("Mobility: " + canMove);
     }
 
     private IEnumerator MovingBehaviour()

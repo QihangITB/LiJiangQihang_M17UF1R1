@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadBehaviour : StateMachineBehaviour
+public class DeadAnimation : StateMachineBehaviour
 {
     const string AnimatorDead = "isDead";
 
