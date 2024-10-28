@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.manager.CanPlayerMove())
+        if (!PlayerManager.player.CanPlayerMove())
         {
             DisableRunAnimation();
             return;
