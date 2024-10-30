@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    const string AnimatorDead = "isDead", DamageObject = "Damage";
+    const string AnimatorDead = "isDead", AnimatorCheckpoint = "CheckpointActivation";
+    const string DamageTag = "Damage", CheckpointTag = "Checkpoint";
 
     public static PlayerManager player;
-    public Animator animator;
+    public Animator playerAnimator, checkpointAnimator;
 
     private Transform checkPoint;
     private bool canMove = true;
@@ -15,9 +16,14 @@ public class PlayerManager : MonoBehaviour
     public void Awake()
     {
         if (player != null && player != this)
+        {
             Destroy(this.gameObject);
-
-        player = this;
+        }
+        else
+        {
+            player = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
     public bool CanPlayerMove()
     {
@@ -36,7 +42,7 @@ public class PlayerManager : MonoBehaviour
     public void Respawn()
     {
         //El jugador aparece en el checkpoint
-        animator.gameObject.transform.position = checkPoint.position;
+        playerAnimator.gameObject.transform.position = checkPoint.position;
 
         //Permitimos sus movimientos
         canMove = true;
@@ -44,18 +50,24 @@ public class PlayerManager : MonoBehaviour
 
     private void Death()
     {
-        animator.SetBool(AnimatorDead, true);
+        playerAnimator.SetBool(AnimatorDead, true);
         canMove = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(DamageObject))
+        if (collision.gameObject.CompareTag(DamageTag))
             Death();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag(DamageObject))
+        if (collision.gameObject.CompareTag(DamageTag))
             Death();
+        else if (collision.gameObject.CompareTag(CheckpointTag))
+        {
+            SetCheckPoint(collision.gameObject.transform);
+            checkpointAnimator.SetTrigger(AnimatorCheckpoint);
+            Debug.Log("Checkpoint");
+        }
     }
 }

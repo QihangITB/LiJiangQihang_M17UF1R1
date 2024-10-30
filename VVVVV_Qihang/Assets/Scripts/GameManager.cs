@@ -63,18 +63,15 @@ public class GameManager : MonoBehaviour
     public void Pause()
     {
         Debug.Log("Pause");
-        if (!SceneManager.GetSceneByName(PauseScene).isLoaded)
-        {
-            Time.timeScale = 0f; //Pausamos el juego.
-            SceneManager.LoadScene(PauseScene, LoadSceneMode.Additive);
-        }
+        Time.timeScale = 0f; //Pausamos el juego.
+        SceneManager.LoadScene(PauseScene, LoadSceneMode.Additive);
     }
  
     public void Resume()
     {
         Debug.Log("Resume");
-        Time.timeScale = 1f; //Reanudamos el juego.
         SceneManager.UnloadSceneAsync(PauseScene);
+        Time.timeScale = 1f; //Reanudamos el juego.
     }
 
     public void GameOver()
