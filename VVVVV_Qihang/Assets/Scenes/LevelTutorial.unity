@@ -24331,7 +24331,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12, y: 396}
+  m_AnchoredPosition: {x: 18, y: 447}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031784051
@@ -24354,7 +24354,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Be careful with the red surface!
+  m_text: Be careful with the red surface! But don't worry, you can save your progress
+    by taking checkpoints.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 880114d1c6de9744dbf2fd80256986d5, type: 2}
   m_sharedMaterial: {fileID: -8470771385526644690, guid: 880114d1c6de9744dbf2fd80256986d5, type: 2}
@@ -24381,7 +24382,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.6
+  m_fontSize: 19.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -24417,7 +24418,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -5.936554, y: 0, z: -53.834488, w: 25.569202}
+  m_margin: {x: -5.936554, y: 0, z: -53.834488, w: 3.710747}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -32818,11 +32819,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2094174617231519799, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.14
+      value: -7.56
       objectReference: {fileID: 0}
     - target: {fileID: 2094174617231519799, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.26
+      value: -2.13
       objectReference: {fileID: 0}
     - target: {fileID: 2094174617231519799, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
       propertyPath: m_LocalPosition.z
