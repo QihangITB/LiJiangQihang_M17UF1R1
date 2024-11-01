@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager manager;
 
+    private EventSystem eventSystem;
+
     public void Awake()
     {
         if (manager != null && manager != this)
@@ -28,9 +30,14 @@ public class GameManager : MonoBehaviour
         {
             manager = this;
             DontDestroyOnLoad(this.gameObject);
+
+            eventSystem = FindObjectOfType<EventSystem>();
+            DontDestroyOnLoad(eventSystem.gameObject);
         }
 
     }
+
+    
 
     private void Update()
     {
