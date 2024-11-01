@@ -12,14 +12,16 @@ public class GameManager : MonoBehaviour
     const string TutorialScene = "LevelTutorial";
     const string PauseScene = "PauseMenu";
     const string GameOverScene = "GameOverMenu";
+    const string SettingScene = "SettingMenu";
     const string GameplayScene = "Level";
 
     public static GameManager manager;
 
     public void Awake()
     {
-        if(manager != null && manager != this )
+        if (manager != null && manager != this)
         {
+            Debug.Log("Destroying GameManager");
             Destroy(this.gameObject);
         }
         else
@@ -27,12 +29,15 @@ public class GameManager : MonoBehaviour
             manager = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name.Contains(GameplayScene))
             SwitchPause();
+        if (Input.GetKeyDown(KeyCode.Q))
+            GameOver();
     }
 
 
@@ -47,23 +52,20 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         Debug.Log("Play");
-
-        //Cargamos la escena de juego.
         SceneManager.LoadScene(TutorialScene);
+        Time.timeScale = 1f;
     }
 
     public void Quit()
     {
         Debug.Log("Quit");
-
-        //Cerramos la aplicación.
         Application.Quit();
     }
 
     public void Pause()
     {
         Debug.Log("Pause");
-        Time.timeScale = 0f; //Pausamos el juego.
+        Time.timeScale = 0f;
         SceneManager.LoadScene(PauseScene, LoadSceneMode.Additive);
     }
  
@@ -71,23 +73,34 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Resume");
         SceneManager.UnloadSceneAsync(PauseScene);
-        Time.timeScale = 1f; //Reanudamos el juego.
+        Time.timeScale = 1f;
     }
 
     public void GameOver()
     {
         Debug.Log("GameOver");
-
         SceneManager.LoadScene(GameOverScene);
+        Time.timeScale = 1f;
     }
 
     public void Home()
     {
         Debug.Log("Home");
-
-        //Cargamos la escena del inicio.
         SceneManager.LoadScene(MainScene);
+        Time.timeScale = 1f;
     }
 
+    public void Setting()
+    {
+        Debug.Log("Setting");
+        Time.timeScale = 0f;
+        SceneManager.LoadScene(SettingScene, LoadSceneMode.Additive);
+    }
 
+    public void SettingToHome()
+    {
+        Debug.Log("From Setting to Home");
+        SceneManager.UnloadSceneAsync(SettingScene);
+        Time.timeScale = 1f;
+    }
 }

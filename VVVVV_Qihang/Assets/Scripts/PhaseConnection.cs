@@ -30,14 +30,14 @@ public class PhaseConnection : MonoBehaviour
         if (playerCollision.IsTouching(exitCollision) && nextPhase != null)
         {
             ChangePhase(nextPhase);
-            PlayerSpawn(nextPhase, nextPhaseEntrance.transform); //La salida esta conectada con la entrada de la fase siguiente.
+            PlayerSpawn(nextPhaseEntrance.transform); //La salida esta conectada con la entrada de la fase siguiente.
         }
 
         //Si hay una fase anterior, accede a ella.
         if (playerCollision.IsTouching(entranceCollision) && previousPhase != null)
         {
             ChangePhase(previousPhase);
-            PlayerSpawn(previousPhase, previousPhaseExit.transform); //La entrada esta conectada con la salida de la fase anterior.
+            PlayerSpawn(previousPhaseExit.transform); //La entrada esta conectada con la salida de la fase anterior.
         }
     }
 
@@ -49,7 +49,7 @@ public class PhaseConnection : MonoBehaviour
     }
 
     //Coloca al jugador en la entrada/salida de la nueva fase, dependiendo de si se accede a la fase anterior o siguiente.
-    private void PlayerSpawn(GameObject newPhase, Transform spawnPoint)
+    private void PlayerSpawn(Transform spawnPoint)
     {
         GameObject player = GameObject.FindGameObjectWithTag(PlayerTag);
         if (spawnPoint != null)
