@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     const string AnimatorDead = "isDead", AnimatorCheckpoint = "CheckpointActivation";
-    const string DamageTag = "Damage", CheckpointTag = "Checkpoint";
+    const string DamageTag = "Damage", CheckpointTag = "Checkpoint", FinishTag = "Finish", StartTag = "Start";
     const string SceneLevel = "Level", Exit = "Exit", Entrance = "Entrance";
     const float SoundVolum = 1f;
     const int Offset = 1;
@@ -128,10 +128,22 @@ public class PlayerManager : MonoBehaviour
 
 
         if (collision.gameObject.CompareTag(DamageTag))
+        {
             Death();
+        }
         else if (collision.gameObject.CompareTag(CheckpointTag))
         {
             SaveCheckpoint(collision);
+        }
+        else if (collision.gameObject.CompareTag(FinishTag))
+        {
+            GameManager.manager.GameOver();
+            Destroy(this.gameObject); //Destruimos el jugador.
+            player = null; //Borramos los datos del jugador.
+        }
+        else if (collision.gameObject.CompareTag(StartTag))
+        {
+            GameManager.manager.Play();
         }
         else if (collision.gameObject.name == Exit)
         {

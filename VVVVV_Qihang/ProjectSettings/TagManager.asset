@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Damage
   - Checkpoint
+  - Start
   layers:
   - Default
   - TransparentFX

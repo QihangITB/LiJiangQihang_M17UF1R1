@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     const string MainScene = "MainMenu", PauseScene = "PauseMenu", GameOverScene = "GameOverMenu", SettingScene = "SettingMenu";
-    const string TutorialScene = "LevelTutorial", GameplayScene = "Level";
+    const string TutorialScene = "LevelTutorial", FirstGameScene = "Level1", InGameScene = "Level";
     const string EventSystemName = "EventSystem", MusicVolume = "MusicVolume";
     const int VolumePlus = 20;
 
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         //Si estamos en una escena de juego, podremos pausar el juego.
-        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name.Contains(GameplayScene))
+        if (Input.GetKeyDown(KeyCode.Escape) && SceneManager.GetActiveScene().name.Contains(InGameScene))
             SwitchPause();
 
         //Cuando estemos en la escena de ajustes, actualizaremos el slider de volumen.
@@ -63,10 +63,6 @@ public class GameManager : MonoBehaviour
             UpdateVolumeSlider();
             SetVolumToAudioMixer();
         }
-
-
-        if (Input.GetKeyDown(KeyCode.Q))
-            GameOver(); //TEST
     }
 
     public void SwitchPause()
@@ -77,10 +73,17 @@ public class GameManager : MonoBehaviour
             Resume();
     }
 
+    public void PlayTutorial()
+    {
+        //Debug.Log("Tutorial");
+        SceneManager.LoadScene(TutorialScene);
+        Time.timeScale = 1f;
+    }
+
     public void Play()
     {
         //Debug.Log("Play");
-        SceneManager.LoadScene(TutorialScene);
+        SceneManager.LoadScene(FirstGameScene);
         Time.timeScale = 1f;
     }
 
