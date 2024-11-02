@@ -377,6 +377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6238091393699829279, guid: 3460e2c877e31e042848aabb36cd2de6, type: 3}
+      propertyPath: audioMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: f19107168571f3948a5fe55b37b276d2, type: 2}
     - target: {fileID: 8399835523460390008, guid: 3460e2c877e31e042848aabb36cd2de6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -770,7 +774,7 @@ GameObject:
   - component: {fileID: 1054360084}
   - component: {fileID: 1054360083}
   m_Layer: 5
-  m_Name: Volume
+  m_Name: Volume Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1252,8 +1256,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 361, y: 15.0000305}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 322, y: 11}
+  m_SizeDelta: {x: 196.0206, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1694244394
 MonoBehaviour:
@@ -1299,13 +1303,25 @@ MonoBehaviour:
   m_FillRect: {fileID: 688815641}
   m_HandleRect: {fileID: 912419091}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6238091393699829279, guid: 3460e2c877e31e042848aabb36cd2de6, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SaveVolume
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

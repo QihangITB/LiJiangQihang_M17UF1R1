@@ -61,7 +61,7 @@ public class PlayerManager : MonoBehaviour
         SetCheckPoint(collision.transform);
         lastGravity = rb.gravityScale;
         lastSpriteFlipY = spriteRenderer.flipY;
-        //Debug.Log("Checkpoint: " + transform.position + " " + lastGravity); ;
+        Debug.Log("Checkpoint: " + transform.position + " " + lastGravity); ;
     }
     public void Respawn()
     {

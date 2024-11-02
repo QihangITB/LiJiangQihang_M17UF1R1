@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,8 +19,6 @@ public class PlayerMovement : MonoBehaviour
     private bool isGravityInverted;
     private LayerMask surfaceLayer;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!PlayerManager.player.CanPlayerMove())
