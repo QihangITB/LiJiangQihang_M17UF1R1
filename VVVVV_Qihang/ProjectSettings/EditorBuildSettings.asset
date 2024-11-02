@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/MainMenu.unity
     guid: e6b4ec7a8cfd8e34ba3eb4cdd1437aa7
   - enabled: 1
-    path: Assets/Scenes/InGame/LevelTutorial.unity
+    path: Assets/Scenes/InGame/Level0.unity
     guid: 3760bf48014808d458de8885fd00e8eb
   - enabled: 1
     path: Assets/Scenes/Menus/GameOverMenu.unity
@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/SettingMenu.unity
     guid: 9df0c0f57ccca10408ef8977b28c2b7a
+  - enabled: 1
+    path: Assets/Scenes/InGame/Level2.unity
+    guid: 50404809eed8837429b74be0c5bb0aaa
+  - enabled: 1
+    path: Assets/Scenes/InGame/Level1.unity
+    guid: 07c7f99090d178c44857087a9986d6b5
   m_configObjects: {}

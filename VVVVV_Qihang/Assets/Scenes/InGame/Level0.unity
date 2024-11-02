@@ -8834,7 +8834,7 @@ GameObject:
   - component: {fileID: 258172724}
   - component: {fileID: 258172725}
   m_Layer: 0
-  m_Name: Entrance 4B
+  m_Name: Entrance0 4B
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -8911,7 +8911,7 @@ GameObject:
   - component: {fileID: 284529374}
   - component: {fileID: 284529375}
   m_Layer: 0
-  m_Name: Entrance
+  m_Name: Entrance0
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -14237,7 +14237,7 @@ GameObject:
   - component: {fileID: 619915936}
   - component: {fileID: 619915937}
   m_Layer: 0
-  m_Name: Entrance
+  m_Name: Entrance0
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -19361,7 +19361,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &855855893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19580,7 +19580,7 @@ GameObject:
   - component: {fileID: 952204517}
   - component: {fileID: 952204516}
   m_Layer: 0
-  m_Name: Exit
+  m_Name: Exit0
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -24655,7 +24655,7 @@ GameObject:
   - component: {fileID: 1078727629}
   - component: {fileID: 1078727628}
   m_Layer: 0
-  m_Name: Exit B
+  m_Name: Exit0 B
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -24921,7 +24921,7 @@ GameObject:
   - component: {fileID: 1148284221}
   - component: {fileID: 1148284222}
   m_Layer: 0
-  m_Name: Entrance
+  m_Name: Entrance0
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -25517,7 +25517,7 @@ GameObject:
   - component: {fileID: 1275840855}
   - component: {fileID: 1275840856}
   m_Layer: 0
-  m_Name: Entrance 4A
+  m_Name: Entrance0 4A
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -26194,7 +26194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &1339484425
 Grid:
   m_ObjectHideFlags: 0
@@ -26408,7 +26408,7 @@ GameObject:
   - component: {fileID: 1462230285}
   - component: {fileID: 1462230286}
   m_Layer: 0
-  m_Name: Entrance
+  m_Name: Entrance0
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -30602,7 +30602,7 @@ GameObject:
   - component: {fileID: 1562876078}
   - component: {fileID: 1562876077}
   m_Layer: 0
-  m_Name: Exit
+  m_Name: Exit0
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -30679,7 +30679,7 @@ GameObject:
   - component: {fileID: 1569642716}
   - component: {fileID: 1569642715}
   m_Layer: 0
-  m_Name: Exit
+  m_Name: Exit0
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -31975,7 +31975,7 @@ GameObject:
   - component: {fileID: 1858357038}
   - component: {fileID: 1858357039}
   m_Layer: 0
-  m_Name: Entrance
+  m_Name: Entrance0
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -32563,7 +32563,7 @@ GameObject:
   - component: {fileID: 1987861308}
   - component: {fileID: 1987861309}
   m_Layer: 0
-  m_Name: Exit A
+  m_Name: Exit0 A
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -32931,7 +32931,7 @@ GameObject:
   - component: {fileID: 2138645031}
   - component: {fileID: 2138645030}
   m_Layer: 0
-  m_Name: Exit
+  m_Name: Exit0
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -33011,7 +33011,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2094174617231519799, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.54
+      value: -3.013
       objectReference: {fileID: 0}
     - target: {fileID: 2094174617231519799, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -33057,6 +33057,22 @@ PrefabInstance:
       propertyPath: checkpointAnimator
       value: 
       objectReference: {fileID: 2017533430}
+    - target: {fileID: 9010896965969698066, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9444663
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010896965969698066, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
+      propertyPath: m_Size.y
+      value: 1.6041669
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010896965969698066, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.025748031
+      objectReference: {fileID: 0}
+    - target: {fileID: 9010896965969698066, guid: 0468162b8daf35a44825aa31900a68a5, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.05042735
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

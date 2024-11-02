@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerManager : MonoBehaviour
 {
     const string AnimatorDead = "isDead", AnimatorCheckpoint = "CheckpointActivation";
     const string DamageTag = "Damage", CheckpointTag = "Checkpoint";
+    const string SceneLevel = "Level", Exit = "Exit", Entrance = "Entrance";
     const float SoundVolum = 1f;
+    const int Offset = 1;
 
     public static PlayerManager player;
     public Animator playerAnimator;
@@ -23,11 +27,14 @@ public class PlayerManager : MonoBehaviour
     {
         if (player != null && player != this)
         {
+            //Debug.Log("Destroy player");
             Destroy(this.gameObject);
         }
         else
         {
+            //Debug.Log("Player is alive");
             player = this;
+            DontDestroyOnLoad(this.gameObject);
         }
     }
     public void Start()
@@ -36,6 +43,7 @@ public class PlayerManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
     }
+
     public bool CanPlayerMove()
     {
         return canMove;
@@ -51,6 +59,13 @@ public class PlayerManager : MonoBehaviour
         return checkPoint;
     }
 
+    private void SavePlayerData(Transform position)
+    {
+        SetCheckPoint(position);
+        lastGravity = rb.gravityScale;
+        lastSpriteFlipY = spriteRenderer.flipY;
+    }
+
     private void SaveCheckpoint(Collider2D collision)
     {
         //Activamos la animacion del checkpoint.
@@ -58,10 +73,8 @@ public class PlayerManager : MonoBehaviour
         checkpointAnimator.SetTrigger(AnimatorCheckpoint);
 
         //Guardamos los datos del juagdor.
-        SetCheckPoint(collision.transform);
-        lastGravity = rb.gravityScale;
-        lastSpriteFlipY = spriteRenderer.flipY;
-        Debug.Log("Checkpoint: " + transform.position + " " + lastGravity); ;
+        SavePlayerData(collision.transform);
+        //Debug.Log("Checkpoint: " + transform.position + " " + lastGravity); ;
     }
     public void Respawn()
     {
@@ -84,19 +97,55 @@ public class PlayerManager : MonoBehaviour
         //Debug.Log("Death: " + transform.position + " " + lastGravity);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void ChangeScene(string sceneName, string spawnpointName)
     {
-        if (collision.gameObject.CompareTag(DamageTag))
-            Death();
+        //Iniciar la corutina de cambio de escena.
+        StartCoroutine(LoadSceneAndRespawn(sceneName, spawnpointName));
+    }
+
+    private IEnumerator LoadSceneAndRespawn(string sceneName, string spawnpointName)
+    {
+        //Cargamos la nueva escena de forma asíncrona.
+        AsyncOperation newAsyncScene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+
+        //Esperamos hasta que la escena esté completamente cargada.
+        while (!newAsyncScene.isDone)
+        {
+            yield return null;
+        }
+
+        //Guardamos los datos del jugador en el punto de spawn que puede ser entrada o salida.
+        SavePlayerData(GameObject.Find(spawnpointName).transform);
+
+        //Movemos al jugador a la posición de respawn en la nueva escena.
+        Respawn();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        string ActualScene = SceneManager.GetActiveScene().name;
+        int ActualLevel = int.Parse(ActualScene.Substring(ActualScene.Length - Offset));
+
+
         if (collision.gameObject.CompareTag(DamageTag))
             Death();
         else if (collision.gameObject.CompareTag(CheckpointTag))
         {
             SaveCheckpoint(collision);
         }
+        else if (collision.gameObject.name == Exit)
+        {
+            ChangeScene(SceneLevel + (ActualLevel + Offset), Entrance);
+        }
+        else if (collision.gameObject.name == Entrance)
+        {
+            ChangeScene(SceneLevel + (ActualLevel - Offset), Exit);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(DamageTag))
+            Death();
     }
 }

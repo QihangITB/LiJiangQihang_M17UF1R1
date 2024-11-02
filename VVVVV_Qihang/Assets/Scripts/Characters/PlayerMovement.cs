@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     const string AnimatorMoving = "isMoving", AnimatorJumping = "isJumping", SurfaceLayer = "Surface";
     const int OpenAngle = 180, CloseAngle = 0, Zero = 0;
-    const float RayDistance = 1f, SoundVolume = 1f;
+    const float RayDistance = 0.8f, SoundVolume = 1f;
 
     public float speed;
     public Animator animator;
