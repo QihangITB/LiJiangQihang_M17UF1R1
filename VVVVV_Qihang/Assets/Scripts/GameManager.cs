@@ -16,8 +16,7 @@ public class GameManager : MonoBehaviour
     const string GameplayScene = "Level";
 
     public static GameManager manager;
-
-    private EventSystem eventSystem;
+    public static EventSystem eventSystem; //Crearemos nuestro propio EventSystem para evitar problemas con el que ya existe en la escena.
 
     public void Awake()
     {
@@ -30,9 +29,17 @@ public class GameManager : MonoBehaviour
         {
             manager = this;
             DontDestroyOnLoad(this.gameObject);
+        }
 
-            eventSystem = FindObjectOfType<EventSystem>();
-            DontDestroyOnLoad(eventSystem.gameObject);
+        //Solo se creara una vez al principio cuando no exista.
+        if (eventSystem == null)
+        {
+            GameObject newEventSystem = new GameObject("EventSystem");
+            newEventSystem.AddComponent<EventSystem>();
+            newEventSystem.AddComponent<StandaloneInputModule>();
+            eventSystem = newEventSystem.GetComponent<EventSystem>();
+
+            DontDestroyOnLoad(newEventSystem);
         }
 
     }
