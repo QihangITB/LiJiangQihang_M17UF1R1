@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     private AudioSource audioSource;
     private bool canMove = true, lastSpriteFlipY;
     private float lastGravity;
-    private float triggerCooldown = 1f, nextTriggerTime = 0f;
+    private float triggerCooldown = 1.2f, nextTriggerTime = 0f;
     public void Awake()
     {
         if (player != null && player != this)
