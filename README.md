@@ -1,1 +1,17 @@
-# LiJiangQihang_M17UF1R1
+# QQQQQ mi version de VVVVV
+
+ÍNDICE:
+- [Controles jugador](#control)
+- [Mecánicas](#mecanicas)
+- [Escenas / UI](#escenas)
+- [Datos interesantes](#datos)
+
+--- 
+
+## CONTROLES DEL JUGADOR:
+
+## MECÁNICAS:
+
+## ESCENAS / UI:
+
+## DATOS INTERESANTES:
