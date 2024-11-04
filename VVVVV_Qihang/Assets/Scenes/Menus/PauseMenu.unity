@@ -209,6 +209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7137751515146835778, guid: 3460e2c877e31e042848aabb36cd2de6, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: f19107168571f3948a5fe55b37b276d2, type: 2}
     - target: {fileID: 8399835523460390008, guid: 3460e2c877e31e042848aabb36cd2de6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -659,7 +663,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6238091393699829279, guid: 3460e2c877e31e042848aabb36cd2de6, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Play
+        m_MethodName: Replay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

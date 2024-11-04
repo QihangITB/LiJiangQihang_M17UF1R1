@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     const float SoundVolum = 1f;
     const int Offset = 1;
 
+
     public static PlayerManager player;
     public Animator playerAnimator;
     public AudioClip deathSound;
@@ -22,7 +23,7 @@ public class PlayerManager : MonoBehaviour
     private AudioSource audioSource;
     private bool canMove = true, lastSpriteFlipY;
     private float lastGravity;
-
+    private float triggerCooldown = 1f, nextTriggerTime = 0f;
     public void Awake()
     {
         if (player != null && player != this)
@@ -78,6 +79,9 @@ public class PlayerManager : MonoBehaviour
     }
     public void Respawn()
     {
+        //Descongela la posición del jugador.
+        rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+
         //El jugador aparece en el checkpoint con los datos que le pertenece.
         rb.gravityScale = lastGravity;
         spriteRenderer.flipY = lastSpriteFlipY;
@@ -90,16 +94,26 @@ public class PlayerManager : MonoBehaviour
 
     private void Death()
     {
+        //Congela la posición del jugador.
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+
         //Ejecuta el sonido una vez mientras se activa la animacion.
         audioSource.PlayOneShot(deathSound, SoundVolum);
+
         playerAnimator.SetBool(AnimatorDead, true);
         canMove = false;
         //Debug.Log("Death: " + transform.position + " " + lastGravity);
     }
 
-    public void ChangeScene(string sceneName, string spawnpointName)
+    public void ChangeScene(string spawnpointName)
     {
-        //Iniciar la corutina de cambio de escena.
+        string actualScene = SceneManager.GetActiveScene().name;
+        int actualLevel = int.Parse(actualScene.Substring(actualScene.Length - Offset));
+
+        //Obtenemos el nombre de la escena a la que queremos cambiar.
+        string sceneName = SceneLevel + (actualLevel + (spawnpointName == Exit ? - Offset : Offset));
+
+        //Iniciamos la corutina de cambio de escena.
         StartCoroutine(LoadSceneAndRespawn(sceneName, spawnpointName));
     }
 
@@ -123,35 +137,38 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        string ActualScene = SceneManager.GetActiveScene().name;
-        int ActualLevel = int.Parse(ActualScene.Substring(ActualScene.Length - Offset));
+        //Debug.Log("Activable trigger: " + nextTriggerTime + " / Actual time: " + Time.time);
+        if (Time.time >= nextTriggerTime)
+        {
+            if (collision.gameObject.CompareTag(DamageTag))
+            {
+                Death();
+            }
+            else if (collision.gameObject.CompareTag(CheckpointTag))
+            {
+                SaveCheckpoint(collision);
+            }
+            else if (collision.gameObject.CompareTag(FinishTag))
+            {
+                GameManager.manager.GameOver();
+                Destroy(this.gameObject); //Destruimos el jugador.
+                player = null; //Borramos los datos del jugador.
+            }
+            else if (collision.gameObject.CompareTag(StartTag))
+            {
+                GameManager.manager.Play();
+            }
+            else if (collision.gameObject.name == Exit)
+            {
+                ChangeScene(Entrance);
+            }
+            else if (collision.gameObject.name == Entrance)
+            {
+                ChangeScene(Exit);
+            }
 
-
-        if (collision.gameObject.CompareTag(DamageTag))
-        {
-            Death();
-        }
-        else if (collision.gameObject.CompareTag(CheckpointTag))
-        {
-            SaveCheckpoint(collision);
-        }
-        else if (collision.gameObject.CompareTag(FinishTag))
-        {
-            GameManager.manager.GameOver();
-            Destroy(this.gameObject); //Destruimos el jugador.
-            player = null; //Borramos los datos del jugador.
-        }
-        else if (collision.gameObject.CompareTag(StartTag))
-        {
-            GameManager.manager.Play();
-        }
-        else if (collision.gameObject.name == Exit)
-        {
-            ChangeScene(SceneLevel + (ActualLevel + Offset), Entrance);
-        }
-        else if (collision.gameObject.name == Entrance)
-        {
-            ChangeScene(SceneLevel + (ActualLevel - Offset), Exit);
+            //Activa el cooldown antes de detectar otro trigger.
+            nextTriggerTime = Time.time + triggerCooldown;
         }
     }
 

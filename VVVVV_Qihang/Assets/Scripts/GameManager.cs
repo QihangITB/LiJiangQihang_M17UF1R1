@@ -13,15 +13,21 @@ public class GameManager : MonoBehaviour
     const string MainScene = "MainMenu", PauseScene = "PauseMenu", GameOverScene = "GameOverMenu", SettingScene = "SettingMenu";
     const string TutorialScene = "LevelTutorial", FirstGameScene = "Level1", InGameScene = "Level";
     const string EventSystemName = "EventSystem", MusicVolume = "MusicVolume";
+    const string PlayerGameObject = "Player";
     const int VolumePlus = 20;
 
     public static GameManager manager;
     public static EventSystem eventSystem; //Crearemos nuestro propio EventSystem para evitar problemas con el que ya existe en la escena.
 
     [SerializeField] private AudioMixer audioMixer;
+    private AudioClip newMusic;
 
     public void Awake()
     {
+        //Guardamos la música que se va a reproducir de la nueva escena en una variable AudioClip.
+        newMusic = GetComponent<AudioSource>().clip;
+        //Debug.Log("New Music: " + newMusic.name);
+
         if (manager != null && manager != this)
         {
             //Debug.Log("Destroying GameManager");
@@ -30,7 +36,17 @@ public class GameManager : MonoBehaviour
         else
         {
             manager = this;
+            //manager.gameObject.GetComponent<AudioSource>().clip = newMusic;
             DontDestroyOnLoad(this.gameObject);
+        }
+
+        if(newMusic != manager.gameObject.GetComponent<AudioSource>().clip && newMusic != null)
+        {
+            //Assignamos la musica guardada al manager.
+            manager.gameObject.GetComponent<AudioSource>().clip = newMusic;
+
+            //Reproducimos la música.
+            manager.gameObject.GetComponent<AudioSource>().Play();
         }
 
         //Solo se creara una vez al principio cuando no exista.
@@ -83,7 +99,16 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         //Debug.Log("Play");
+        Destroy(GameObject.Find(PlayerGameObject));
         SceneManager.LoadScene(FirstGameScene);
+        Time.timeScale = 1f;
+    }
+
+    public void Replay()
+    {
+        //Debug.Log("Replay");
+        Destroy(GameObject.Find(PlayerGameObject));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
     }
 
@@ -117,6 +142,7 @@ public class GameManager : MonoBehaviour
     public void Home()
     {
         //Debug.Log("Home");
+        Destroy(GameObject.Find(PlayerGameObject));
         SceneManager.LoadScene(MainScene);
         Time.timeScale = 1f;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PhaseConnection : MonoBehaviour
 {
-    private const string PlayerTag = "Player";
+    private const string PlayerTag = "Player", TutorialEndPoint = "Portal";
 
     [SerializeField] private GameObject entrance;
     [SerializeField] private GameObject exit;
@@ -20,19 +20,22 @@ public class PhaseConnection : MonoBehaviour
     private void Awake()
     {
         playerCollision = GameObject.FindGameObjectWithTag(PlayerTag).GetComponent<Collider2D>();
-        entranceCollision = entrance.GetComponent<Collider2D>();
-        exitCollision = exit.GetComponent<Collider2D>();
+        entranceCollision = entrance != null ? entrance.GetComponent<Collider2D>() : null;
+        exitCollision = exit != null ? exit.GetComponent<Collider2D>() : null;
     }
 
     void Update()
     {
+        if (playerCollision == null)
+            return;
+
         //Si hay una siguiete fase, accede a ella.
         if (playerCollision.IsTouching(exitCollision) && nextPhase != null)
         {
             ChangePhase(nextPhase);
             PlayerSpawn(nextPhaseEntrance.transform); //La salida esta conectada con la entrada de la fase siguiente.
         }
-
+        
         //Si hay una fase anterior, accede a ella.
         if (playerCollision.IsTouching(entranceCollision) && previousPhase != null)
         {

@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private AudioSource audioSource;
     private bool isGravityInverted;
     private LayerMask surfaceLayer;
+    private float idleTimer = 0.0f, timeToDisableAnimation = 0.5f;
 
     void Start()
     {
@@ -61,9 +62,14 @@ public class PlayerMovement : MonoBehaviour
 
             animator.SetBool(AnimatorMoving, true);
         }
+        else
+        {
+            idleTimer += Time.deltaTime;
 
-        if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
-            DisableRunAnimation();
+            //Desactivamos la animación si el temporizador supera el límite
+            if (idleTimer >= timeToDisableAnimation)
+                DisableRunAnimation();
+        }
     }
 
     private void DisableRunAnimation()
