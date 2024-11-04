@@ -5,6 +5,7 @@
 - [Controles jugador](#control)
 - [Mecánicas](#mecanicas)
 - [Escenas / UI](#escenas)
+- [Musica / Sonido](#audio)
 
 --- 
 <a name="historia"></a>
@@ -45,3 +46,14 @@ El juego esta ambientado en una zona industrial con muchas fabricas de alta cont
 - Configuración: En este menu podremos configurar el nivel del volumen de la música y salir del propio menu, el volumen es persistente.
 - Pausa: Durante la partida, ya sea en el tutorial o en el juego, podremos pausar de dos maneras: haciendo click en el boton de pausa o pulsando la tecla "Esc". En este menu podemos realizar tres acciones, volver al punto de inicio de la partida (tutorial/juego), salir del menu de pausa y reanudar al juego, o volver directamente al menu principal.
 - Fin de juego: Tras llegar a la fase final del juego, nos aparecera una pantalla de "GameOver" indicando el fin del juego, en esta pantalla, a parte de la musica de victoria, podremos realizar dos acciones: volver al inicio del juego de manera que volveriamos a jugar, o volver al menu principal.
+- 
+---
+<a name="audio"></a>
+## MUSICA / SONIDO:
+### Musica:
+- Menu: Hay una musica para cuando el usuario este en el menu.
+- Partida: Hay otra para cuando esta en juego, es decir que tenga al personaje y pueda controlarlo.
+### Sonido:
+- Muerte: Cuando el jugador muere, a parte de verlo visualmente, escucharemos una sonido de muerte.
+- Cambio gravedad: Cuando invertimos la gravedad del jugador, escucharemos un sonido.
+- Fin de juego: Al llegar al final y "pasarse el juego", junto con el menu de "Game Over" escucharemos un sonido.
