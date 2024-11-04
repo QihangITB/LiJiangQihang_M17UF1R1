@@ -1,5 +1,9 @@
-# QQQQQ mi version de VVVVV
+# "QQQQQ" MI VERSION DE "VVVVV"
+<p align="center">
+  <img src="VVVVV_Qihang/Assets/Sprites/Background/Background.png" alt="Fondo">
+</p>
 
+--- 
 ÍNDICE:
 - [Historia](#historia)
 - [Controles jugador](#control)
